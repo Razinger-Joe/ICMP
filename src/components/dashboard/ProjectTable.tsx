@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Progress } from '@/components/ui/progress';
 import { mockProjects } from '@/mock/data';
-import { ProjectStatus } from '@/types';
+import type { ProjectStatus } from '@/types';
 import { cn } from '@/lib/utils';
 
 const statusMap: Record<ProjectStatus, { label: string, color: string }> = {
