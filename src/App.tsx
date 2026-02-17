@@ -3,6 +3,10 @@ import { Sidebar } from '@/components/layout/Sidebar';
 import { Navbar } from '@/components/layout/Navbar';
 import Dashboard from '@/pages/Dashboard';
 import LandingPage from '@/pages/LandingPage';
+import Projects from '@/pages/Projects';
+import Costs from '@/pages/Costs';
+import FieldData from '@/pages/FieldData';
+import Reports from '@/pages/Reports';
 import { useStore } from '@/store/useStore';
 import { useEffect } from 'react';
 
@@ -37,14 +41,23 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
 
-        <Route path="/dashboard" element={
-          <DashboardLayout>
-            <Dashboard />
-          </DashboardLayout>
-        } />
-
-        {/* Placeholder for future routes */}
-        <Route path="/projects" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+        <Route path="/projects" element={<DashboardLayout><Projects /></DashboardLayout>} />
+        <Route path="/schedule" element={<DashboardLayout><div className="p-4 bg-slate-900/50 rounded-2xl border border-slate-800 text-center py-20">
+          <h2 className="text-2xl font-bold mb-2">Schedule Management</h2>
+          <p className="text-slate-400">Gantt view and milestone tracking module coming soon.</p>
+        </div></DashboardLayout>} />
+        <Route path="/costs" element={<DashboardLayout><Costs /></DashboardLayout>} />
+        <Route path="/safety" element={<DashboardLayout><div className="p-4 bg-slate-900/50 rounded-2xl border border-slate-800 text-center py-20">
+          <h2 className="text-2xl font-bold mb-2">HSE Compliance</h2>
+          <p className="text-slate-400">Site safety audit and incident reporting module coming soon.</p>
+        </div></DashboardLayout>} />
+        <Route path="/field" element={<DashboardLayout><FieldData /></DashboardLayout>} />
+        <Route path="/reports" element={<DashboardLayout><Reports /></DashboardLayout>} />
+        <Route path="/settings" element={<DashboardLayout><div className="p-4 bg-slate-900/50 rounded-2xl border border-slate-800 text-center py-20">
+          <h2 className="text-2xl font-bold mb-2">System Settings</h2>
+          <p className="text-slate-400">Enterprise configuration and user access controls module coming soon.</p>
+        </div></DashboardLayout>} />
 
         {/* Catch-all */}
         <Route path="*" element={<Navigate to="/" replace />} />

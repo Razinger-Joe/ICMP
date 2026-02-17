@@ -2,20 +2,22 @@ import { LayoutDashboard, FolderKanban, Calendar, DollarSign, ShieldAlert, Camer
 import { cn } from '@/lib/utils';
 import { useStore } from '@/store/useStore';
 import { Button } from '@/components/ui/button';
+import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', id: 'dashboard' },
-    { icon: FolderKanban, label: 'Projects', id: 'projects' },
-    { icon: Calendar, label: 'Schedule', id: 'schedule' },
-    { icon: DollarSign, label: 'Costs', id: 'costs' },
-    { icon: ShieldAlert, label: 'Safety', id: 'safety' },
-    { icon: Camera, label: 'Field Data', id: 'field' },
-    { icon: BarChart3, label: 'Reports', id: 'reports' },
-    { icon: Settings, label: 'Settings', id: 'settings' },
+    { icon: LayoutDashboard, label: 'Dashboard', id: 'dashboard', path: '/dashboard' },
+    { icon: FolderKanban, label: 'Projects', id: 'projects', path: '/projects' },
+    { icon: Calendar, label: 'Schedule', id: 'schedule', path: '/schedule' },
+    { icon: DollarSign, label: 'Costs', id: 'costs', path: '/costs' },
+    { icon: ShieldAlert, label: 'Safety', id: 'safety', path: '/safety' },
+    { icon: Camera, label: 'Field Data', id: 'field', path: '/field' },
+    { icon: BarChart3, label: 'Reports', id: 'reports', path: '/reports' },
+    { icon: Settings, label: 'Settings', id: 'settings', path: '/settings' },
 ];
 
 export const Sidebar = () => {
     const { sidebarCollapsed, toggleSidebar } = useStore();
+    const location = useLocation();
 
     return (
         <div className={cn(
@@ -30,23 +32,28 @@ export const Sidebar = () => {
             </div>
 
             <nav className="flex-1 overflow-y-auto py-4">
-                {navItems.map((item) => (
-                    <div
-                        key={item.id}
-                        className={cn(
-                            "flex items-center px-4 py-3 cursor-pointer transition-colors hover:bg-slate-800 text-slate-400 hover:text-white group",
-                            item.id === 'dashboard' && "bg-slate-800 text-blue-400 border-l-4 border-blue-400"
-                        )}
-                    >
-                        <item.icon size={20} className={cn(sidebarCollapsed ? "mx-auto" : "mr-3")} />
-                        {!sidebarCollapsed && <span className="font-medium">{item.label}</span>}
-                        {sidebarCollapsed && (
-                            <div className="absolute left-16 bg-slate-800 px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
-                                {item.label}
-                            </div>
-                        )}
-                    </div>
-                ))}
+                {navItems.map((item) => {
+                    const isActive = location.pathname === item.path;
+                    return (
+                        <Link
+                            key={item.id}
+                            to={item.path}
+                            className={cn(
+                                "flex items-center px-4 py-3 cursor-pointer transition-colors hover:bg-slate-800 text-slate-400 hover:text-white group relative",
+                                isActive && "bg-slate-800/50 text-blue-400"
+                            )}
+                        >
+                            {isActive && <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 rounded-r shadow-[0_0_10px_rgba(59,130,246,0.5)]" />}
+                            <item.icon size={20} className={cn(sidebarCollapsed ? "mx-auto" : "mr-3")} />
+                            {!sidebarCollapsed && <span className="font-medium">{item.label}</span>}
+                            {sidebarCollapsed && (
+                                <div className="absolute left-16 bg-slate-800 px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl border border-slate-700">
+                                    {item.label}
+                                </div>
+                            )}
+                        </Link>
+                    );
+                })}
             </nav>
 
             <div className="p-4 border-t border-slate-800">
