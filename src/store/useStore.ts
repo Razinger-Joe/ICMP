@@ -1,12 +1,14 @@
 import { create } from 'zustand';
 
+type Theme = 'dark' | 'light';
+
 interface ICMPState {
     selectedProjectId: string | null;
     sidebarCollapsed: boolean;
-    theme: 'light' | 'dark';
+    theme: Theme;
     setSelectedProjectId: (id: string | null) => void;
     toggleSidebar: () => void;
-    setTheme: (theme: 'light' | 'dark') => void;
+    setTheme: (theme: Theme) => void;
 }
 
 export const useStore = create<ICMPState>((set) => ({

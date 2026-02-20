@@ -1,21 +1,25 @@
 export type ProjectStatus = 'on-track' | 'at-risk' | 'delayed' | 'on-hold';
 
+export interface ProjectLocation {
+    lat: number;
+    lng: number;
+    address: string;
+}
+
+export interface ProjectBudget {
+    total: number;
+    spent: number;
+    forecast: number;
+}
+
 export interface Project {
     id: string;
     name: string;
     type: string;
-    location: {
-        lat: number;
-        lng: number;
-        address: string;
-    };
+    location: ProjectLocation;
     status: ProjectStatus;
     healthScore: number;
-    budget: {
-        total: number;
-        spent: number;
-        forecast: number;
-    };
+    budget: ProjectBudget;
     completion: number;
     startDate: string;
     endDate: string;
@@ -31,9 +35,14 @@ export interface MetricCard {
     status?: 'success' | 'warning' | 'danger' | 'neutral';
 }
 
-export interface ChartDataPoint {
-    date: string;
-    value: number;
-    planned?: number;
-    actual?: number;
+export interface PerformanceDataPoint {
+    month: string;
+    spi: number;
+    cpi: number;
+}
+
+export interface BudgetDataPoint {
+    month: string;
+    planned: number;
+    actual: number;
 }
