@@ -11,7 +11,7 @@ interface ICMPState {
 
 export const useStore = create<ICMPState>((set) => ({
     selectedProjectId: null,
-    sidebarCollapsed: false,
+    sidebarCollapsed: true,
     theme: 'dark',
     setSelectedProjectId: (id) => set({ selectedProjectId: id }),
     toggleSidebar: () => set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
