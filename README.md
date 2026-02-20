@@ -4,7 +4,7 @@
 
 **Transforms complex infrastructure delivery into a data-driven, autonomous workflow.**
 
-[![Live Demo](https://img.shields.io/badge/▶_Live_Demo-dist--three--hazel.vercel.app-0066CC?style=for-the-badge&logo=vercel&logoColor=white)](https://dist-three-hazel.vercel.app)
+[![Live Demo](https://img.shields.io/badge/▶_Live_Demo-icmp--platform.vercel.app-0066CC?style=for-the-badge&logo=vercel&logoColor=white)](https://icmp-platform.vercel.app)
 [![GitHub](https://img.shields.io/badge/GitHub-Razinger--Joe/ICMP-181717?style=for-the-badge&logo=github)](https://github.com/Razinger-Joe/ICMP)
 [![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -16,6 +16,7 @@
 <img src="https://img.shields.io/badge/status-Active_Development-10B981?style=flat-square" />
 <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" />
 <img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" />
+<img src="https://img.shields.io/badge/dependencies-lean_&_optimized-4ade80?style=flat-square" />
 
 </div>
 
@@ -23,12 +24,12 @@
 
 ## 🌍 Overview
 
-**ICMP** is a next-generation construction management platform designed for **African infrastructure at scale**. By integrating **5D BIM visualization**, **continuous IoT sensor telemetry**, and **AI‑powered scheduling and forecasting**, ICMP provides project managers and executives a single source of truth for portfolio health.
+**ICMP** is a next-generation construction management platform designed for **African infrastructure at scale**. By integrating **continuous IoT sensor telemetry**, **real-time financial analytics**, and **AI‑powered scheduling and forecasting**, ICMP provides project managers and executives a single source of truth for portfolio health.
 
 The platform includes an **Executive Dashboard** for real-time CPI/SPI tracking, a **Project Command Center** for granular site monitoring, and predictive engines that surface budget overruns and schedule delays before they occur — all built with a **"Safety-First"** philosophy to improve safety, quality, and field-to-office coordination.
 
 > [!TIP]
-> **Try it now →** [dist-three-hazel.vercel.app](https://dist-three-hazel.vercel.app)
+> **Try it now →** [icmp-platform.vercel.app](https://icmp-platform.vercel.app)
 
 ---
 
@@ -63,7 +64,7 @@ Fully responsive design with mobile-first approach:
 - Collapsible sidebar with overlay on mobile
 - Hamburger navigation menu
 - Touch-optimized charts and tables
-- Adaptive layout breakpoints
+- Adaptive layout breakpoints (`sm`, `md`, `lg`, `xl`)
 
 ---
 
@@ -80,10 +81,11 @@ Fully responsive design with mobile-first approach:
 | **Animation** | Framer Motion | Declarative animations & transitions |
 | **Icons** | Lucide React | Consistent, lightweight icon system |
 | **Routing** | React Router 7 | Client-side navigation & SPA routing |
-| **Forms** | React Hook Form + Zod | Performant forms with schema validation |
-| **Server State** | TanStack React Query | Async state management (ready for API) |
-| **3D** | Three.js + React Three Fiber | BIM visualization (coming soon) |
+| **Validation** | Zod | Runtime schema validation |
 | **Deployment** | Vercel | Edge network hosting with SPA rewrites |
+
+> [!NOTE]
+> Dependencies are kept **lean and optimized** — only packages with active imports are included. The project uses strict `satisfies` type checking on mock data and extracted TypeScript interfaces throughout.
 
 ---
 
@@ -118,7 +120,7 @@ ICMP/
 │   ├── lib/
 │   │   └── utils.ts         # Tailwind class merge utility
 │   ├── mock/
-│   │   └── data.ts          # Realistic construction mock data
+│   │   └── data.ts          # Typed mock data with `satisfies`
 │   ├── pages/
 │   │   ├── Costs.tsx        # Financial Controls page
 │   │   ├── Dashboard.tsx    # Executive Dashboard page
@@ -129,16 +131,18 @@ ICMP/
 │   ├── store/
 │   │   └── useStore.ts      # Zustand global state
 │   ├── types/
-│   │   └── index.ts         # TypeScript interfaces
+│   │   ├── index.ts         # Core TypeScript interfaces
+│   │   └── react-simple-maps.d.ts  # Type declarations
 │   ├── App.tsx              # Root component & routing
 │   ├── index.css            # Global styles & CSS variables
 │   └── main.tsx             # Application entry point
+├── .npmrc                   # npm config (legacy-peer-deps)
 ├── components.json          # shadcn/ui configuration
 ├── tailwind.config.js       # Tailwind theme & plugins
 ├── tsconfig.app.json        # TypeScript configuration
 ├── vite.config.ts           # Vite build configuration
 ├── vercel.json              # Vercel SPA rewrites
-└── package.json
+└── package.json             # Dependencies & scripts
 ```
 
 ---
@@ -177,6 +181,19 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
+## 🧹 Code Quality
+
+ICMP maintains a high standard of code quality through:
+
+- **Strict TypeScript** — Extracted interfaces (`ProjectLocation`, `ProjectBudget`, `PerformanceDataPoint`, `Device`, `Report`, etc.) with `satisfies` compile-time checks
+- **Zero dead code** — All unused files and dependencies are pruned
+- **Extracted constants** — Shared values (`CHART_COLORS`, `tooltipStyle`, `STATUS_CONFIG`) are single-point-of-change
+- **Helper functions** — Reusable utilities (`getHealthColor`, `formatBudget`, `getStatusIndicator`) reduce inline logic
+- **Semantic keys** — React list keys use meaningful identifiers, not array indices
+- **Accessibility** — `title` attributes on icon buttons, semantic HTML throughout
+
+---
+
 ## 🗺️ Roadmap
 
 - [x] Executive Dashboard with KPI cards
@@ -189,6 +206,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 - [x] Dark/Light Theme Support
 - [x] Mobile Responsive Design
 - [x] Vercel Production Deployment
+- [x] Code Optimization & Dependency Cleanup
 - [ ] 3D BIM Viewer (Three.js)
 - [ ] AI-Powered Schedule Predictions
 - [ ] Gantt Chart Module
